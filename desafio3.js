@@ -1,46 +1,6 @@
-import express, { response } from "express"
-
-const app = express()
-
-let db = await fs.promises.readFile("./productsDb.json", `utf-8`)
-
-app.get("/", (request, response) => {
-    response.send("Comenzando el Desafío 3...")
-})
-
-//Implementación de otra ruta /products
-app.get ("/products", (request, response) => {
-    response.send(JSON.parse(db))
-})
-
-//Implementación query params (http://localhost:8080/products)
-app.get ("/products", (request, response) => {
-    const limit = request.query.limit
-    if(!limit) {
-        response.send (JSON.parse(db))
-    } else {
-        let cantidad = db.slice(0, limit)
-        response.send(cantidad)
-    }
-})
-
-// Implementación de la ruta pid (products id)
-app.get("/products/:pid", (request, response) => {
-    const id = request.params.pid
-    const product = JSON.parse(db).find(item => item.id == id)
-    if (!product) {
-        return response.send({error: "El producto no existe"}) 
-    } else {
-        return response.send(product)
-    }
-})
-
-app.listen(8080, () => console.log("Server Up..."))
-
-
 import fs from "fs"
 
-class ProductManager {
+ export class ProductManager {
     #products
     constructor(path) {
         this.#products = []
