@@ -44,8 +44,8 @@ import fs from "fs"
     }
 }
 
-/*
 const product = new ProductManager(`./productsDb.json`)
+/*
 //Lista de Productos
 product.getProducts()
 //Productos Agregados
